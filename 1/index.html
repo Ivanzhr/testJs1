@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict'
+        class WordSearch {
+            constructor(text) {
+                this.text = text.toLowerCase();
+            }
+
+            countOccurrences(word) {
+                const lowercaseWord = word.toLowerCase();
+                let count = 0;
+                let startIndex = 0;
+
+                while (true) {
+                    const foundIndex = this.text.indexOf(lowercaseWord, startIndex);
+                    if (foundIndex === -1) {
+                        break;
+                    }
+                    count++;
+                    startIndex = foundIndex + lowercaseWord.length;
+                }
+
+                return count;
+            }
+        }
+
+        const text = 'Є деякий текст. Скрипт має здійснити пошук слова. У результаті роботи скрипта потрібно відобразити кількість разів, які слово зустрічається в тексті. Під час пошуку необхідно враховувати такі чинники!';
+        const wordToSearch = 'тек';
+
+        const searcher = new WordSearch(text);
+        const occurrences = searcher.countOccurrences(wordToSearch);
+
+        console.log(`Слово "${wordToSearch}" зустрічається ${occurrences} разів.`);
+
+
+
+    </script>
+</body>
+
+</html>

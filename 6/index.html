@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        'use strict'
+
+        class Contacts{
+            constructor(name, surName, tel, email){
+                this.name = name;
+                this.surName = surName;
+                this.tel = tel;
+                this.email = email;
+            }
+
+            add(name, surName, tel, email){
+                const newContact = new Contacts(name, surName, tel, email);
+                myContacts.push(newContact)
+            }
+
+            settings(index, newName, newSurName, newTel, newEmail){
+                const contactToEdit = myContacts[index];
+                contactToEdit.name = newName;
+                contactToEdit.surName = newSurName;
+                contactToEdit.tel = newTel;
+                contactToEdit.email = newEmail;
+            }
+
+            delete(index){
+                myContacts.splice(index, 1);
+            }
+
+
+        }
+
+        const myContacts = [
+            new Contacts('Ivan', 'Zhovnorovych', '0991926097', 'ivan@gamil.com'),
+            new Contacts('Ilona', 'Zhovnorovych', '0000124275', 'ilona@gamil.com'),
+            new Contacts('Andrii', 'Zhovnorovych', '0994526097', 'andrii@gamil.com'),
+            new Contacts('Maryana', 'Zhovnorovych', '0919260543', 'mareana@gamil.com'),
+            new Contacts('Momy', 'Zhovnorovych', '099193445', 'oks@gamil.com'),
+            new Contacts('Dady', 'Zhovnorovych', '09919234235', 'igor@gamil.com'),
+        ]
+
+        const addNewContact = new Contacts();
+        addNewContact.add('Ігор', 'Сидоров', '0991234567', 'igor@gmail.com');
+        addNewContact.settings(0, 'Ivan', 'Нове прізвище', 'Новий телефон', 'Новий Email');
+        addNewContact.delete(1);
+        
+
+        console.log(myContacts);
+    </script>
+</body>
+</html>

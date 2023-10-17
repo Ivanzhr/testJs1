@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict'
+
+        class Exchange {
+            constructor(text, wordsToSearch, wordsToExchange) {
+                this.text = text.split(' ');
+                this.wordsToSearch = wordsToSearch;
+                this.wordsToExchange = wordsToExchange;
+                this.stats = {};
+            }
+
+            found() {
+                for (let i = 0; i < this.wordsToSearch.length; i++) {
+                    const wordToReplace = this.wordsToSearch[i];
+                    const replacementWord = this.wordsToExchange[i];
+
+                    for (let j = 0; j < this.text.length; j++) {
+                        if (this.text[j].toLowerCase() === wordToReplace.toLowerCase()) {
+
+                            this.text[j] = replacementWord;
+
+
+                            if (this.stats[wordToReplace]) {
+                                this.stats[wordToReplace].count++;
+                                this.stats[wordToReplace].replacements.push(replacementWord);
+                            } else {
+                                this.stats[wordToReplace] = {
+                                    count: 1,
+                                    replacements: [replacementWord],
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+
+            getStatistics() {
+                return this.stats;
+            }
+        }
+
+        const a = 'Cat runs. Dog runs. Cat jumps.';
+        const wordsToSearch = ['cat', 'dog'];
+        const wordsToExchange = ['bird', 'fish'];
+        const b = new Exchange(a, wordsToSearch, wordsToExchange);
+
+        b.found();
+        console.log('Початковий текст ' + a);
+        console.log('Масив для пошуку ' + wordsToSearch.join(' '));
+        console.log('Масив для заміни ' + wordsToExchange.join(' '));
+        console.log('Текст після заміни ' + b.text.join(' '));
+
+        const statistics = b.getStatistics();
+        console.log('Статистика замін:');
+        for (const word in statistics) {
+            console.log(`Слово "${word}" було замінено ${statistics[word].count} разів на слова: ${statistics[word].replacements.join(', ')}`);
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict'
+
+        class ArrNumbers {
+            constructor() {
+                this.one = [1, 2, 3, 4, 5, 11];
+                this.two = [1, 5, 6, 7, 12];
+                this.three = [1, 7, 8, 9, 13];
+                this.four = [1, 4, 5, 6, 8, 9, 14];
+                this.five = [];
+            }
+
+            unite() {
+                return [...this.one, ...this.two, ...this.three, ...this.four].sort((a,b) => b - a);
+            }
+
+            uniqElements(){ 
+                const arr = []; 
+                const allElements = this.unite(); 
+              
+                const counts = {};
+                allElements.forEach( el => counts[el] = (counts[el] || 0) + 1 );
+                // console.log(counts)
+              
+                Object.keys(counts).forEach(key => {
+                  if(counts[key] === 1){
+                    arr.push(+key);
+                  }
+                })
+      
+                return arr; 
+            } 
+ 
+            uniteElements(){ 
+                const arr = []; 
+                const allElements = this.unite(); 
+             
+                allElements.forEach(item => { 
+                    const index1 = this.one.indexOf(item); 
+                    const index2 = this.two.indexOf(item); 
+                    const index3 = this.three.indexOf(item); 
+                    const index4 = this.four.indexOf(item); 
+                     
+                    if (index1 >= 0 && index2 >= 0 && index3 >= 0 && index4 >= 0){ 
+                        arr.push(item); 
+                    } 
+                }); 
+                const result = arr.filter((value, index, self) => self.indexOf(value) === index); 
+                return result; 
+            } 
+
+            simpleNumber(){
+                 let array = this.unite().flat().filter(number => {
+                    if(number <= 1){
+                        return false;
+                    }
+
+                    for (let i = 2; i < number; i++){
+                        if(number % i === 0) {
+                            return false;
+                        }
+                    }
+                    return true;
+                 })
+
+                 array = array.filter((number, index) => {
+                    return array.indexOf(number) === index;
+                 })
+                 return array;
+            }
+
+
+        } 
+ 
+    
+        let allElem = new ArrNumbers(); 
+        console.log('Всі елементи в спадаючому порядку ' + allElem.unite()); 
+        console.log('Унікальні елементи', allElem.uniqElements()); 
+        console.log('Спільні елемнети', allElem.uniteElements());
+        console.log(allElem.simpleNumber());
+
+        
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
